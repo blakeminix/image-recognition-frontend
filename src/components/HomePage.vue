@@ -31,7 +31,8 @@ export default {
         this.uploadStatus = 'Please select a file.';
         return;
       }
-      
+      this.uploadStatus = 'Uploading...';
+      this.predictionResult = null;
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
@@ -63,7 +64,7 @@ export default {
           .catch(error => {
             console.error('Error retrieving prediction:', error);
           });
-      }, 1000);
+      }, 2000);
     },
   },
   beforeUnmount() {
