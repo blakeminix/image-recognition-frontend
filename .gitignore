@@ -23,3 +23,5 @@ pnpm-debug.log*
 *.sw?
 
 .env.local
+# Local Netlify folder
+.netlify

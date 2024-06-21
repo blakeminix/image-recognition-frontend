@@ -7,6 +7,7 @@
       <h3>Prediction Result:</h3>
       <p>{{ predictionResult }}</p>
     </div>
+    <div>{{errorStatus}}</div>
   </div>
 </template>
 
@@ -20,6 +21,7 @@ export default {
       uploadStatus: '',
       predictionResult: null,
       predictionPolling: null,
+      errorStatus: '',
     };
   },
   methods: {
@@ -48,6 +50,7 @@ export default {
         })
         .catch(error => {
           console.error('Error uploading image:', error);
+          this.errorStatus = error;
           this.uploadStatus = 'Error uploading image.';
         });
     },
