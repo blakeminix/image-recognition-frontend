@@ -1,13 +1,18 @@
 <template>
   <div>
-    <input type="file" @change="handleFileUpload">
+    <input type="file" accept="image/*" @change="handleFileUpload">
     <button @click="uploadImage">Upload Image</button>
+    <div v-if="imagePreview">
+      <br />
+      <img :src="imagePreview" alt="Selected Image" class="image-preview">
+      <br />
+    </div>
     <div v-if="uploadStatus">{{ uploadStatus }}</div>
     <div v-if="predictionResult">
-      <h3>Prediction Result:</h3>
+      <h3>Prediction:</h3>
       <p>{{ predictionResult }}</p>
     </div>
-    <div>{{errorStatus}}</div>
+    <div>{{ errorStatus }}</div>
   </div>
 </template>
 
@@ -18,6 +23,7 @@ export default {
   data() {
     return {
       selectedFile: null,
+      imagePreview: null,
       uploadStatus: '',
       predictionResult: null,
       predictionPolling: null,
@@ -26,7 +32,17 @@ export default {
   },
   methods: {
     handleFileUpload(event) {
-      this.selectedFile = event.target.files[0];
+      const file = event.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        this.selectedFile = file;
+        this.imagePreview = URL.createObjectURL(file);
+        this.uploadStatus = '';
+        this.predictionResult = null;
+      } else {
+        this.selectedFile = null;
+        this.imagePreview = null;
+        this.uploadStatus = 'Please select a valid image file.';
+      }
     },
     uploadImage() {
       if (!this.selectedFile) {
@@ -61,7 +77,7 @@ export default {
           .then(response => {
             if (response.status === 200) {
               this.predictionResult = response.data.predicted_label;
-              this.uploadStatus = 'Prediction retrieved';
+              this.uploadStatus = '';
               clearInterval(this.predictionPolling);
             }
           })
@@ -78,3 +94,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.image-preview {
+  max-width: 400px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+</style>
