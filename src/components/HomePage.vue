@@ -35,6 +35,7 @@ export default {
       }
       this.uploadStatus = 'Uploading...';
       this.predictionResult = null;
+      this.errorStatus = '';
       const formData = new FormData();
       formData.append('file', this.selectedFile);
 
@@ -50,7 +51,7 @@ export default {
         })
         .catch(error => {
           console.error('Error uploading image:', error);
-          this.errorStatus = error;
+          this.errorStatus = 'Network error. Please try again.';
           this.uploadStatus = 'Error uploading image.';
         });
     },
