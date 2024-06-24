@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center p-4 gap-4 bg-blue-200 min-h-screen">
+  <div class="flex flex-col items-center p-4 gap-4 min-h-screen">
     <div class="flex flex-row gap-12 mt-8">
       <input type="file" accept="image/*" @change="handleFileUpload" class="hidden" ref="fileInput">
       <button @click="triggerFileInput" class="mb-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
@@ -12,7 +12,7 @@
     <div v-if="imagePreview" class="mb-4">
       <img :src="imagePreview" alt="Selected Image" class="max-w-sm max-h-96 w-auto h-auto block m-auto border-2 border-gray-400 rounded">
     </div>
-    <div v-if="uploadStatus" class="mb-4 text-blue-600 text-lg">{{ uploadStatus }}</div>
+    <div v-if="uploadStatus" class="mb-4 text-gray-700 text-lg">{{ uploadStatus }}</div>
     <div v-if="predictionResult" class="mb-4 text-center">
       <h3 class="text-xl font-semibold">Prediction:</h3>
       <p class="text-gray-700 mt-4 text-lg">{{ predictionResult }}</p>
