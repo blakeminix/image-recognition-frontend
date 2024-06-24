@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="file" accept="image/*" @change="handleFileUpload">
-    <button @click="uploadImage">Upload Image</button>
+    <button @click="uploadImage">Predict Image</button>
     <div v-if="imagePreview">
       <br />
       <img :src="imagePreview" alt="Selected Image" class="image-preview">
