@@ -1,5 +1,9 @@
 # image-recognition-frontend
 
+Back-end repository: [https://github.com/blakeminix/image-recognition-backend](https://github.com/blakeminix/image-recognition-backend)
+
+ML model repository: [https://github.com/blakeminix/image-recognition-model](https://github.com/blakeminix/image-recognition-model)
+
 ## Project setup
 ```
 npm install
